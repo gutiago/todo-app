@@ -7,11 +7,17 @@ import '../../components/logo.dart';
 import '../../resources/app_colors.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({this.onLoggedIn});
+
+  final VoidCallback onLoggedIn;
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   Widget _backgroundGradient() {
     return Container(
       decoration: BoxDecoration(
@@ -36,29 +42,33 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _mainContent() {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: Spacings.x6),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const SizedBox(height: Spacings.x5),
-          InputText(
-            title: 'Email',
-            hintText: 'Insira seu email',
-            icon: Icons.email_outlined,
-          ),
-          const SizedBox(height: Spacings.x5),
-          InputText(
-            title: 'Password',
-            hintText: 'Insira sua senha',
-            icon: Icons.lock_outlined,
-          ),
-          const SizedBox(height: Spacings.x10),
-          Button(
-            text: 'LOGIN',
-            disabledColor: Colors.white.withOpacity(0.7),
-            onPressed: () {},
-          )
-        ],
+      child: Form(
+        key: _formKey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: Spacings.x5),
+            InputText(
+              title: 'Email',
+              hintText: 'Insira seu email',
+              icon: Icons.email_outlined,
+            ),
+            const SizedBox(height: Spacings.x5),
+            InputText(
+              title: 'Password',
+              hintText: 'Insira sua senha',
+              icon: Icons.lock_outlined,
+            ),
+            const SizedBox(height: Spacings.x10),
+            Button(
+              text: 'LOGIN',
+              disabledColor: Colors.white.withOpacity(0.7),
+              onPressed:
+                  _formKey.currentState?.validate() ?? false ? () {} : null,
+            )
+          ],
+        ),
       ),
     );
   }
@@ -69,14 +79,13 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Center(
-          child: ButtonLink(
-            text: 'Não tem uma conta? ',
-            linkText: 'Cadastre-se aqui.',
-            onLinkPressed: () {
-              print('pressed');
-            },
-          )
-        ),
+            child: ButtonLink(
+          text: 'Não tem uma conta? ',
+          linkText: 'Cadastre-se aqui.',
+          onLinkPressed: () {
+            print('pressed');
+          },
+        )),
       ),
     );
   }
