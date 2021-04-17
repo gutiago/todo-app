@@ -6,6 +6,7 @@ import '../resources/app_colors.dart';
 import '../resources/routes.dart';
 import '../resources/spacings.dart';
 import '../resources/strings.dart';
+import '../components/logo.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
@@ -28,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   String get _initialRoute =>
-      widget.authenticator.isSignedIn() ? Routes.login : Routes.login;
+      widget.authenticator.isSignedIn() ? Routes.home : Routes.login;
 
   void _performAsyncChecks() async {
     Future.delayed(Duration(seconds: 2), () async {
@@ -52,30 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget _logo() {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CircleAvatar(
-            backgroundColor: Colors.white,
-            radius: 45.0,
-            child: Icon(
-              Icons.fact_check_outlined,
-              color: AppColors.lightBlue,
-              size: 45.0,
-            ),
-          ),
-          const SizedBox(height: Spacings.x2),
-          Text(
-            Strings.appName,
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 24.0),
-          )
-        ],
-      ),
-    );
+    return Center(child: Logo(title: Strings.appName));
   }
 
   Widget _bottomLoading(BuildContext context) {

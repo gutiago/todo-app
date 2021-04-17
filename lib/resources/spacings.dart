@@ -8,4 +8,8 @@ abstract class Spacings {
   static const x5 = x1 * 5;
   static const x6 = x1 * 6;
   static const x7 = x1 * 7;
+  static const x8 = x1 * 8;
+  static const x9 = x1 * 9;
+  static const x10 = x1 * 10;
+  static const x20 = x1 * 20;
 }
