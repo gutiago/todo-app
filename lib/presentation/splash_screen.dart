@@ -1,15 +1,42 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import '../auth/firebase_authenticator.dart';
 import '../resources/app_colors.dart';
+import '../resources/routes.dart';
 import '../resources/spacings.dart';
 import '../resources/strings.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({
+    @required this.onLoadFinished,
+    @required this.authenticator,
+  });
+
+  final Function onLoadFinished;
+  final FirebaseAuthenticator authenticator;
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    _performAsyncChecks();
+  }
+
+  String get _initialRoute =>
+      widget.authenticator.isSignedIn() ? Routes.login : Routes.login;
+
+  void _performAsyncChecks() async {
+    Future.delayed(Duration(seconds: 2), () async {
+      await Firebase.initializeApp();
+      widget.onLoadFinished(_initialRoute);
+    });
+  }
+
   Widget _backgroundGradient() {
     return Positioned.fill(
       child: Container(
