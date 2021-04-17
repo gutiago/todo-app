@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/resources/spacings.dart';
 import '../../components/button.dart';
+import '../../components/button_link.dart';
 import '../../components/input_text.dart';
 import '../../components/logo.dart';
 import '../../resources/app_colors.dart';
@@ -62,12 +63,35 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  Widget _bottom(BuildContext context) {
+    return Positioned(
+      bottom: Spacings.x8,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        child: Center(
+          child: ButtonLink(
+            text: 'Não tem uma conta? ',
+            linkText: 'Cadastre-se aqui.',
+            onLinkPressed: () {
+              print('pressed');
+            },
+          )
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         fit: StackFit.expand,
-        children: [_backgroundGradient(), _mainContent(), _logo(context)],
+        children: [
+          _backgroundGradient(),
+          _mainContent(),
+          _logo(context),
+          _bottom(context),
+        ],
       ),
     );
   }

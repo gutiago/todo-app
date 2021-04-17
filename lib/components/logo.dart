@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../resources/app_colors.dart';
 import '../resources/spacings.dart';
-import '../resources/strings.dart';
 
 class Logo extends StatelessWidget {
   const Logo({this.title});
