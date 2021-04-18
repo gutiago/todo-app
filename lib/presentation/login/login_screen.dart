@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/resources/spacings.dart';
+
 import '../../components/button.dart';
 import '../../components/button_link.dart';
 import '../../components/input_text.dart';
 import '../../components/logo.dart';
+import '../../model/login/login_screen_content.dart';
 import '../../resources/app_colors.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({this.onLoggedIn});
+  const LoginScreen({this.onLoggedIn, this.content});
 
   final VoidCallback onLoggedIn;
+  final LoginScreenContent content;
 
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -17,6 +20,22 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
+  TextEditingController _emailInputController;
+  TextEditingController _passwordInputController;
+
+  @override
+  void initState() {
+    super.initState();
+    _emailInputController = TextEditingController();
+    _passwordInputController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailInputController.dispose();
+    _passwordInputController.dispose();
+  }
 
   Widget _backgroundGradient() {
     return Container(
@@ -35,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
       top: Spacings.x20,
       child: Container(
           width: MediaQuery.of(context).size.width,
-          child: Center(child: Logo(title: 'Sign In'))),
+          child: Center(child: Logo(title: widget.content.title))),
     );
   }
 
@@ -50,19 +69,21 @@ class _LoginScreenState extends State<LoginScreen> {
           children: [
             const SizedBox(height: Spacings.x5),
             InputText(
-              title: 'Email',
-              hintText: 'Insira seu email',
-              icon: Icons.email_outlined,
+              title: widget.content.emailField.title,
+              hintText: widget.content.emailField.hint,
+              icon: widget.content.emailField.icon,
+              controller: _emailInputController,
             ),
             const SizedBox(height: Spacings.x5),
             InputText(
-              title: 'Password',
-              hintText: 'Insira sua senha',
-              icon: Icons.lock_outlined,
+              title: widget.content.passwordField.title,
+              hintText: widget.content.passwordField.hint,
+              icon: widget.content.passwordField.icon,
+              controller: _passwordInputController,
             ),
             const SizedBox(height: Spacings.x10),
             Button(
-              text: 'LOGIN',
+              text: widget.content.buttonTitle,
               disabledColor: Colors.white.withOpacity(0.7),
               onPressed:
                   _formKey.currentState?.validate() ?? false ? () {} : null,
@@ -80,8 +101,8 @@ class _LoginScreenState extends State<LoginScreen> {
         width: MediaQuery.of(context).size.width,
         child: Center(
             child: ButtonLink(
-          text: 'Não tem uma conta? ',
-          linkText: 'Cadastre-se aqui.',
+          text: widget.content.footer,
+          linkText: widget.content.footerLink,
           onLinkPressed: () {
             print('pressed');
           },

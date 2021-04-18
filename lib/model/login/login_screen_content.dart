@@ -8,18 +8,20 @@ class LoginScreenContent {
   const LoginScreenContent({
     this.title,
     this.buttonTitle,
-    this.noAccountText,
-    this.registerText,
+    this.footer,
+    this.footerLink,
     this.isLoading = false,
-    this.formFields,
+    this.emailField,
+    this.passwordField,
   });
 
   final String title;
   final String buttonTitle;
-  final String noAccountText;
-  final String registerText;
+  final String footer;
+  final String footerLink;
   final bool isLoading;
-  final List<FormContent> formFields;
+  final FormContent emailField;
+  final FormContent passwordField;
 
   LoginScreenContent copyWith({
     String title,
@@ -27,15 +29,17 @@ class LoginScreenContent {
     String noAccountText,
     String registerText,
     bool isLoading,
-    List<FormContent> formFields,
+    FormContent emailField,
+    FormContent passwordField,
   }) {
     return LoginScreenContent(
       title: title ?? this.title,
       buttonTitle: buttonTitle ?? this.buttonTitle,
-      noAccountText: noAccountText ?? this.noAccountText,
-      registerText: registerText ?? this.registerText,
+      footer: noAccountText ?? this.footer,
+      footerLink: registerText ?? this.footerLink,
       isLoading: isLoading ?? this.isLoading,
-      formFields: formFields ?? this.formFields,
+      emailField: emailField ?? this.emailField,
+      passwordField: passwordField ?? this.passwordField,
     );
   }
 }
@@ -44,21 +48,19 @@ extension LoginDefaultEmpty on LoginScreenContent {
   static get empty => LoginScreenContent(
         title: Strings.signIn,
         buttonTitle: Strings.loginButton,
-        noAccountText: Strings.noAccount,
-        registerText: Strings.registerHere,
-        formFields: [
-          FormContent(
-            title: Strings.emailTitle,
-            hint: Strings.emailHint,
-            icon: Icons.email_outlined,
-            validator: Validator.emailValidator,
-          ),
-          FormContent(
-            title: Strings.emailTitle,
-            hint: Strings.emailHint,
-            icon: Icons.email_outlined,
-            validator: Validator.passwordValidator,
-          ),
-        ],
+        footer: Strings.noAccount,
+        footerLink: Strings.registerHere,
+        emailField: FormContent(
+          title: Strings.emailTitle,
+          hint: Strings.emailHint,
+          icon: Icons.email_outlined,
+          validator: Validator.emailValidator,
+        ),
+        passwordField: FormContent(
+          title: Strings.emailTitle,
+          hint: Strings.emailHint,
+          icon: Icons.email_outlined,
+          validator: Validator.passwordValidator,
+        ),
       );
 }
