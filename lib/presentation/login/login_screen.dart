@@ -129,8 +129,8 @@ class _LoginScreenState extends State<LoginScreen> {
   void _buttonPressed() {
     if (_formKey.currentState?.validate() ?? false) {
       widget.onLogInPressed(
-        _emailInputController.text,
-        _passwordInputController.text,
+        _emailInputController.text.trim(),
+        _passwordInputController.text.trim(),
       );
     }
   }
