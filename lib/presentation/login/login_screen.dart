@@ -9,9 +9,14 @@ import '../../model/login/login_screen_content.dart';
 import '../../resources/app_colors.dart';
 
 class LoginScreen extends StatefulWidget {
-  const LoginScreen({this.onLoggedIn, this.content});
+  const LoginScreen({
+    this.onLogInPressed,
+    this.onChangeTypePressed,
+    this.content,
+  });
 
-  final VoidCallback onLoggedIn;
+  final Function onLogInPressed;
+  final VoidCallback onChangeTypePressed;
   final LoginScreenContent content;
 
   @override
@@ -95,9 +100,10 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             const SizedBox(height: Spacings.x10),
             Button(
+              isLoading: widget.content.isLoading,
               text: widget.content.buttonTitle,
               disabledColor: Colors.white.withOpacity(0.7),
-              onPressed: _buttonPressed,
+              onPressed: widget.content.isLoading ? null : _buttonPressed,
             )
           ],
         ),
@@ -114,16 +120,19 @@ class _LoginScreenState extends State<LoginScreen> {
             child: ButtonLink(
           text: widget.content.footer,
           linkText: widget.content.footerLink,
-          onLinkPressed: () {
-            print('pressed');
-          },
+          onLinkPressed: widget.onChangeTypePressed,
         )),
       ),
     );
   }
 
   void _buttonPressed() {
-    if (_formKey.currentState?.validate() ?? false) {}
+    if (_formKey.currentState?.validate() ?? false) {
+      widget.onLogInPressed(
+        _emailInputController.text,
+        _passwordInputController.text,
+      );
+    }
   }
 
   @override

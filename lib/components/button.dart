@@ -16,6 +16,7 @@ class Button extends StatelessWidget {
     this.primaryColor = Colors.white,
     this.disabledColor,
     this.textStyle = _defaultTextStyle,
+    this.isLoading = false,
   });
 
   final String text;
@@ -26,6 +27,7 @@ class Button extends StatelessWidget {
   final Color primaryColor;
   final Color disabledColor;
   final TextStyle textStyle;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,13 @@ class Button extends StatelessWidget {
             borderRadius: BorderRadius.circular(radius),
           ),
         ),
-        child: Text(text, style: textStyle),
+        child: isLoading
+            ? SizedBox(
+                height: 20.0,
+                width: 20.0,
+                child: CircularProgressIndicator(
+                    backgroundColor: Colors.white, strokeWidth: 2.0))
+            : Text(text, style: textStyle),
       ),
     );
   }

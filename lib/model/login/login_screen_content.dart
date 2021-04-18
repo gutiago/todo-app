@@ -4,6 +4,8 @@ import 'login_form_content.dart';
 import '../../resources/strings.dart';
 import '../../resources/validators.dart';
 
+enum LoginAction { login, register }
+
 class LoginScreenContent {
   const LoginScreenContent({
     this.title,
@@ -14,6 +16,7 @@ class LoginScreenContent {
     this.isLoading = false,
     this.emailField,
     this.passwordField,
+    this.action = LoginAction.login,
   });
 
   final String title;
@@ -24,6 +27,7 @@ class LoginScreenContent {
   final bool isLoading;
   final FormContent emailField;
   final FormContent passwordField;
+  final LoginAction action;
 
   LoginScreenContent copyWith({
     String title,
@@ -34,6 +38,7 @@ class LoginScreenContent {
     bool isLoading,
     FormContent emailField,
     FormContent passwordField,
+    LoginAction action,
   }) {
     return LoginScreenContent(
       title: title ?? this.title,
@@ -44,6 +49,7 @@ class LoginScreenContent {
       isLoading: isLoading ?? this.isLoading,
       emailField: emailField ?? this.emailField,
       passwordField: passwordField ?? this.passwordField,
+      action: action ?? this.action,
     );
   }
 }
