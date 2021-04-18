@@ -73,6 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: widget.content.emailField.hint,
               icon: widget.content.emailField.icon,
               controller: _emailInputController,
+              validator: widget.content.emailField.validator,
             ),
             const SizedBox(height: Spacings.x5),
             InputText(
@@ -80,13 +81,23 @@ class _LoginScreenState extends State<LoginScreen> {
               hintText: widget.content.passwordField.hint,
               icon: widget.content.passwordField.icon,
               controller: _passwordInputController,
+              validator: widget.content.passwordField.validator,
+              obscureText: true,
+            ),
+            const SizedBox(height: Spacings.x5),
+            Text(
+              widget.content.passwordHint,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.white.withOpacity(0.3),
+              ),
             ),
             const SizedBox(height: Spacings.x10),
             Button(
               text: widget.content.buttonTitle,
               disabledColor: Colors.white.withOpacity(0.7),
-              onPressed:
-                  _formKey.currentState?.validate() ?? false ? () {} : null,
+              onPressed: _buttonPressed,
             )
           ],
         ),
@@ -109,6 +120,10 @@ class _LoginScreenState extends State<LoginScreen> {
         )),
       ),
     );
+  }
+
+  void _buttonPressed() {
+    if (_formKey.currentState?.validate() ?? false) {}
   }
 
   @override

@@ -39,7 +39,9 @@ class _InputTextState extends State<InputText> {
         ),
         const SizedBox(height: Spacings.x2),
         Container(
-          height: 50.0,
+          constraints: BoxConstraints(
+            minHeight: 50,
+          ),
           child: TextFormField(
             controller: widget.controller,
             cursorColor: Colors.white,
@@ -56,6 +58,10 @@ class _InputTextState extends State<InputText> {
                 fontSize: 14.0,
                 color: Colors.white.withOpacity(0.3),
               ),
+              errorStyle: TextStyle(
+                fontSize: 14.0,
+                color: AppColors.errorRed,
+              ),
               fillColor: AppColors.lightBlue,
               filled: true,
               prefixIcon:
@@ -65,15 +71,6 @@ class _InputTextState extends State<InputText> {
                 borderRadius: BorderRadius.circular(5.0),
               ),
             ),
-          ),
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.1),
-                blurRadius: 25,
-                offset: const Offset(0, 0),
-              ),
-            ],
           ),
         ),
       ],

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'auth/firebase_authenticator.dart';
 import 'resources/routes.dart';
+import 'bloc/login/login_bloc.dart';
 import 'presentation/splash_screen.dart';
-import 'presentation/login/login_screen.dart';
+import 'presentation/login/login_screen_controller.dart';
 
 void main() {
   runApp(CreativeApp());
@@ -47,8 +48,21 @@ class _CreativeAppState extends State<CreativeApp> {
             onLoadFinished: (path) => _finishedLoading(context, path),
             authenticator: _firebaseAuthenticator,
           ),
-      Routes.login: (context) => LoginScreen(),
+      Routes.login: (context) => _loginScreen(context),
     };
+  }
+
+  Widget _loginScreen(BuildContext context) {
+    return BlocProvider<LoginBloc>(
+        create: (context) => LoginBloc(authenticator: _firebaseAuthenticator)
+          ..add(FillScreenContentEvent()),
+        child: Builder(
+          builder: (context) {
+            return LoginScreenController(
+              onLoggedIn: () {},
+            );
+          },
+        ));
   }
 
   @override
