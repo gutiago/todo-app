@@ -17,6 +17,14 @@ abstract class Strings {
   static const passwordInvalid = 'Senha inválida';
   static const passwordContentHint = 'A senha precisa incluir ao menos uma letra maiúscula, uma minúscula e possuir no mínimo 8 dígitos.';
 
+  // Login
+  static const createAccount = 'Criar conta';
+  static const emailRegisterHint = 'Insira seu email';
+  static const passwordRegisterHint = 'Insira uma senha';
+  static const registerButton = 'CRIAR';
+  static const hasAccount = 'Já tem uma conta? ';
+  static const accessHere = 'Accesse aqui.';
+
   // Firebase
   static const weakPassword = 'Senha muito fraca.';
   static const inUseEmail = 'O email escolhido já está em uso.';

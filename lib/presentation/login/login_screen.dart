@@ -16,7 +16,7 @@ class LoginScreen extends StatefulWidget {
   });
 
   final Function onLogInPressed;
-  final VoidCallback onChangeTypePressed;
+  final Function onChangeTypePressed;
   final LoginScreenContent content;
 
   @override
@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: ButtonLink(
           text: widget.content.footer,
           linkText: widget.content.footerLink,
-          onLinkPressed: widget.onChangeTypePressed,
+          onLinkPressed: () => widget.onChangeTypePressed(widget.content),
         )),
       ),
     );

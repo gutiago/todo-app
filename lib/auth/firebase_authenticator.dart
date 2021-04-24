@@ -6,15 +6,6 @@ class FirebaseAuthenticator {
     return FirebaseAuth.instance.currentUser != null;
   }
 
-  void userState({Function(bool) state}) {
-    final isSigned = isSignedIn();
-
-    FirebaseAuth.instance.authStateChanges().listen((user) {
-      final isLoggedIn = user != null;
-      state(isLoggedIn != isSigned);
-    });
-  }
-
   Future<String> createUser(String email, String password) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(

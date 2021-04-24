@@ -55,7 +55,7 @@ class LoginScreenContent {
 }
 
 extension LoginDefaultEmpty on LoginScreenContent {
-  static get empty => LoginScreenContent(
+  static get loginEmpty => LoginScreenContent(
         title: Strings.signIn,
         buttonTitle: Strings.loginButton,
         footer: Strings.noAccount,
@@ -74,4 +74,27 @@ extension LoginDefaultEmpty on LoginScreenContent {
           validator: Validator.passwordValidator,
         ),
       );
+}
+
+extension RegisterDefaultEmpty on LoginScreenContent {
+  static get registerEmpty => LoginScreenContent(
+    title: Strings.createAccount,
+    buttonTitle: Strings.registerButton,
+    footer: Strings.hasAccount,
+    footerLink: Strings.accessHere,
+    passwordHint: Strings.passwordContentHint,
+    action: LoginAction.register,
+    emailField: FormContent(
+      title: Strings.emailTitle,
+      hint: Strings.emailRegisterHint,
+      icon: Icons.email_outlined,
+      validator: Validator.emailValidator,
+    ),
+    passwordField: FormContent(
+      title: Strings.passwordTitle,
+      hint: Strings.passwordRegisterHint,
+      icon: Icons.lock_outlined,
+      validator: Validator.passwordValidator,
+    ),
+  );
 }

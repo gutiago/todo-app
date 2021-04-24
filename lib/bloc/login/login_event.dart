@@ -14,7 +14,7 @@ class FillScreenContentEvent extends LoginEvent {
 
   @override
   Stream<LoginState> applyAsync(LoginBloc bloc) async* {
-    yield ContentState(LoginDefaultEmpty.empty);
+    yield ContentState(LoginDefaultEmpty.loginEmpty);
   }
 }
 
@@ -65,5 +65,24 @@ class AttemptLoginEvent extends LoginEvent {
     }
 
     onResponse(message);
+  }
+}
+
+@immutable
+class ChangeLoginActionEvent extends LoginEvent {
+  ChangeLoginActionEvent(this.content);
+
+  final LoginScreenContent content;
+
+  @override
+  Stream<LoginState> applyAsync(LoginBloc bloc) async* {
+    switch (content.action) {
+      case LoginAction.login:
+        yield ContentState(RegisterDefaultEmpty.registerEmpty);
+        break;
+      default:
+        yield ContentState(LoginDefaultEmpty.loginEmpty);
+        break;
+    }
   }
 }

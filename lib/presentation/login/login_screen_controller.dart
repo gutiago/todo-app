@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/model/login/login_screen_content.dart';
 import 'package:todo_app/presentation/login/login_screen.dart';
 
 import '../../bloc/login/login_bloc.dart';
@@ -23,7 +24,7 @@ class LoginScreenController extends StatelessWidget {
           return LoginScreen(
             onLogInPressed: (email, password) =>
                 _tryLogin(context, state, email, password),
-            onChangeTypePressed: () {},
+            onChangeTypePressed: (content) => _changeLoginAction(context, content),
             content: state.content,
           );
         }
@@ -47,13 +48,24 @@ class LoginScreenController extends StatelessWidget {
     ));
   }
 
+  void _changeLoginAction(
+    BuildContext context,
+    LoginScreenContent content,
+  ) {
+    BlocProvider.of<LoginBloc>(context)
+        .add(ChangeLoginActionEvent(content));
+  }
+
   void _checkResponse(BuildContext context, String message) {
     if (message == null) {
       onLoggedIn();
     } else {
+      _presentSnackMessage(context, message);
+    }
+  }
+
+  void _presentSnackMessage(BuildContext context, String message) =>
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text(message)),
       );
-    }
-  }
 }
