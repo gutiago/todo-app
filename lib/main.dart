@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/database/app_database.dart';
 
 import 'auth/firebase_authenticator.dart';
 import 'resources/routes.dart';
@@ -21,12 +22,14 @@ class CreativeApp extends StatefulWidget {
 
 class _CreativeAppState extends State<CreativeApp> {
   final _firebaseAuthenticator = FirebaseAuthenticator();
+  late AppDatabase db;
 
   void _goTo(BuildContext context, String path) {
     Navigator.of(context).pushReplacementNamed(path);
   }
 
-  void _finishedLoading(BuildContext context, String path) {
+  void _finishedLoading(BuildContext context, String path, AppDatabase db) {
+    this.db = db;
     _goTo(context, path);
   }
 
@@ -35,7 +38,8 @@ class _CreativeAppState extends State<CreativeApp> {
       case Routes.initial:
         return CupertinoPageRoute(
             builder: (context) => SplashScreen(
-                  onLoadFinished: (path) => _finishedLoading(context, path),
+                  onLoadFinished: (path, db) =>
+                      _finishedLoading(context, path, db),
                   authenticator: _firebaseAuthenticator,
                 ),
             settings: settings);
