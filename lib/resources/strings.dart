@@ -32,4 +32,8 @@ abstract class Strings {
   static const wrongPassword = 'Senha incorreta.';
   static const commonErrorMessage =
       'Ocorreu um erro, por favor tente novamente.';
+
+  // Category
+  static const categories = 'Categorias';
+  static const emptyList = 'Oops... \nVocê não criou nada aqui.';
 }
