@@ -2,7 +2,11 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class ButtonLink extends StatefulWidget {
-  const ButtonLink({this.text, this.linkText, this.onLinkPressed});
+  const ButtonLink({
+    required this.text,
+    required this.linkText,
+    required this.onLinkPressed,
+  });
 
   final String text;
   final String linkText;
@@ -13,7 +17,7 @@ class ButtonLink extends StatefulWidget {
 }
 
 class _ButtonLinkState extends State<ButtonLink> {
-  TapGestureRecognizer gestureRecognizer;
+  late TapGestureRecognizer gestureRecognizer;
 
   @override
   void initState() {

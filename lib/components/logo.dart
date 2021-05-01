@@ -4,7 +4,7 @@ import '../resources/app_colors.dart';
 import '../resources/spacings.dart';
 
 class Logo extends StatelessWidget {
-  const Logo({this.title});
+  const Logo({required this.title});
 
   final String title;
 

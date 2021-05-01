@@ -6,7 +6,7 @@ class FirebaseAuthenticator {
     return FirebaseAuth.instance.currentUser != null;
   }
 
-  Future<String> createUser(String email, String password) async {
+  Future<String?> createUser(String email, String password) async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email,
@@ -20,7 +20,7 @@ class FirebaseAuthenticator {
     }
   }
 
-  Future<String> login(String email, String password) async {
+  Future<String?> login(String email, String password) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,

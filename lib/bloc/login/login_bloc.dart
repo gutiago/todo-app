@@ -13,9 +13,8 @@ part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
-    @required FirebaseAuthenticator authenticator,
-  })  : assert(authenticator != null),
-        _authenticator = authenticator,
+    required FirebaseAuthenticator authenticator,
+  })  : _authenticator = authenticator,
         super(const InitialState());
 
   final FirebaseAuthenticator _authenticator;

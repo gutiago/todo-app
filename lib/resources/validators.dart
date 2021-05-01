@@ -3,7 +3,11 @@ import 'strings.dart';
 abstract class Validator {
   Validator._() : super();
 
-  static String emailValidator(String value) {
+  static String? emailValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return Strings.emailNotValid;
+    }
+
     final isValid = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(value);
@@ -15,7 +19,7 @@ abstract class Validator {
     return Strings.emailNotValid;
   }
 
-  static String passwordValidator(String password) {
+  static String? passwordValidator(String? password) {
     if (password == null || password.isEmpty) {
       return Strings.passwordInvalid;
     }

@@ -21,16 +21,16 @@ class FillScreenContentEvent extends LoginEvent {
 @immutable
 class AttemptLoginEvent extends LoginEvent {
   AttemptLoginEvent({
-    this.currentState,
-    this.email,
-    this.password,
-    this.onResponse,
+    required this.currentState,
+    required this.email,
+    required this.password,
+    required this.onResponse,
   });
 
   final ContentState currentState;
   final String email;
   final String password;
-  final Function(String errorMessage) onResponse;
+  final Function(String? errorMessage) onResponse;
 
   @override
   Stream<LoginState> applyAsync(LoginBloc bloc) async* {
@@ -59,7 +59,7 @@ class AttemptLoginEvent extends LoginEvent {
     yield* _streamForResponse(message);
   }
 
-  Stream<LoginState> _streamForResponse(String message) async* {
+  Stream<LoginState> _streamForResponse(String? message) async* {
     if (message != null) {
       yield ContentState(currentState.content.copyWith(isLoading: false));
     }

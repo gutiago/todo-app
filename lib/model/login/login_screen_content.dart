@@ -8,14 +8,14 @@ enum LoginAction { login, register }
 
 class LoginScreenContent {
   const LoginScreenContent({
-    this.title,
-    this.buttonTitle,
-    this.footer,
-    this.footerLink,
-    this.passwordHint,
+    required this.title,
+    required this.buttonTitle,
+    required this.footer,
+    required this.footerLink,
+    required this.passwordHint,
     this.isLoading = false,
-    this.emailField,
-    this.passwordField,
+    required this.emailField,
+    required this.passwordField,
     this.action = LoginAction.login,
   });
 
@@ -30,15 +30,15 @@ class LoginScreenContent {
   final LoginAction action;
 
   LoginScreenContent copyWith({
-    String title,
-    String buttonTitle,
-    String footer,
-    String footerLink,
-    String passwordHint,
-    bool isLoading,
-    FormContent emailField,
-    FormContent passwordField,
-    LoginAction action,
+    String? title,
+    String? buttonTitle,
+    String? footer,
+    String? footerLink,
+    String? passwordHint,
+    bool? isLoading,
+    FormContent? emailField,
+    FormContent? passwordField,
+    LoginAction? action,
   }) {
     return LoginScreenContent(
       title: title ?? this.title,

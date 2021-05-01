@@ -4,12 +4,12 @@ import '../resources/app_colors.dart';
 
 class InputText extends StatefulWidget {
   const InputText({
-    this.title,
-    this.hintText,
-    this.icon,
-    this.controller,
+    required this.title,
+    required this.hintText,
+    required this.icon,
+    required this.controller,
     this.obscureText = false,
-    this.validator,
+    required this.validator,
   });
 
   final String title;

@@ -8,7 +8,7 @@ const _defaultTextStyle = TextStyle(
 
 class Button extends StatelessWidget {
   const Button({
-    @required this.text,
+    required this.text,
     this.onPressed,
     this.height = 50,
     this.radius = 25,
@@ -20,12 +20,12 @@ class Button extends StatelessWidget {
   });
 
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final double height;
   final double radius;
   final bool expand;
   final Color primaryColor;
-  final Color disabledColor;
+  final Color? disabledColor;
   final TextStyle textStyle;
   final bool isLoading;
 

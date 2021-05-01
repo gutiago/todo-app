@@ -10,9 +10,9 @@ import '../../resources/app_colors.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
-    this.onLogInPressed,
-    this.onChangeTypePressed,
-    this.content,
+    required this.onLogInPressed,
+    required this.onChangeTypePressed,
+    required this.content,
   });
 
   final Function onLogInPressed;
@@ -25,8 +25,8 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
-  TextEditingController _emailInputController;
-  TextEditingController _passwordInputController;
+  late TextEditingController _emailInputController;
+  late TextEditingController _passwordInputController;
 
   @override
   void initState() {

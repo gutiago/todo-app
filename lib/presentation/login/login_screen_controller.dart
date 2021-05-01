@@ -8,7 +8,7 @@ import '../../bloc/login/login_bloc.dart';
 
 class LoginScreenController extends StatelessWidget {
   const LoginScreenController({
-    this.onLoggedIn,
+    required this.onLoggedIn,
   });
 
   final VoidCallback onLoggedIn;
@@ -56,7 +56,7 @@ class LoginScreenController extends StatelessWidget {
         .add(ChangeLoginActionEvent(content));
   }
 
-  void _checkResponse(BuildContext context, String message) {
+  void _checkResponse(BuildContext context, String? message) {
     if (message == null) {
       onLoggedIn();
     } else {

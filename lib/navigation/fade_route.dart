@@ -8,7 +8,7 @@ class FadeRoute<T> extends PageRoute<T> {
   Color get barrierColor => Colors.transparent;
 
   @override
-  String get barrierLabel => null;
+  String? get barrierLabel => null;
 
   @override
   bool get maintainState => true;

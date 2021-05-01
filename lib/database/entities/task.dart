@@ -2,13 +2,13 @@ import 'package:floor/floor.dart';
 
 @entity
 class Task {
-  Task({
+  Task(
     this.id,
     this.categoryId,
     this.description,
     this.isComplete,
     this.createdAt,
-  });
+  );
 
   @PrimaryKey(autoGenerate: true)
   final int id;

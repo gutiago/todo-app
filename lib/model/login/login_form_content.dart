@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class FormContent {
   const FormContent({
-    this.title,
-    this.hint,
-    this.icon,
-    this.validator,
+    required this.title,
+    required this.hint,
+    required this.icon,
+    required this.validator,
   });
 
   final String title;

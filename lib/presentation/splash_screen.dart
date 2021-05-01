@@ -10,8 +10,8 @@ import '../components/logo.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({
-    @required this.onLoadFinished,
-    @required this.authenticator,
+    required this.onLoadFinished,
+    required this.authenticator,
   });
 
   final Function onLoadFinished;

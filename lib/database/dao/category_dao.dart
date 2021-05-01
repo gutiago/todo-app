@@ -1,5 +1,5 @@
 import 'package:floor/floor.dart';
-import 'entities/category.dart';
+import '../entities/category.dart';
 
 @dao
 abstract class CategoryDao {
