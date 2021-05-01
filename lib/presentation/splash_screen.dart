@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app/database/app_database.dart';
 
 import '../auth/firebase_authenticator.dart';
 import '../resources/app_colors.dart';
@@ -15,7 +14,7 @@ class SplashScreen extends StatefulWidget {
     required this.authenticator,
   });
 
-  final Function(String path, AppDatabase db) onLoadFinished;
+  final Function(String path) onLoadFinished;
   final FirebaseAuthenticator authenticator;
 
   @override
@@ -35,9 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _performAsyncChecks() async {
     Future.delayed(const Duration(milliseconds: 1500), () async {
       await Firebase.initializeApp();
-      final database =
-          await $FloorAppDatabase.databaseBuilder('app_database.db').build();
-      widget.onLoadFinished(_initialRoute, database);
+      final database = widget.onLoadFinished(_initialRoute);
     });
   }
 
