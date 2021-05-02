@@ -15,7 +15,8 @@ abstract class Strings {
   static const registerHere = 'Cadastre-se aqui.';
   static const emailNotValid = 'Insira um email válido';
   static const passwordInvalid = 'Senha inválida';
-  static const passwordContentHint = 'A senha precisa incluir ao menos uma letra maiúscula, uma minúscula e possuir no mínimo 8 dígitos.';
+  static const passwordContentHint =
+      'A senha precisa incluir ao menos uma letra maiúscula, uma minúscula e possuir no mínimo 8 dígitos.';
 
   // Login
   static const createAccount = 'Criar conta';
@@ -36,4 +37,15 @@ abstract class Strings {
   // Category
   static const categories = 'Categorias';
   static const emptyList = 'Oops... \nVocê não criou nada aqui.';
+  static const createCategory = 'Crie sua categoria';
+  static const createCategoryTitle = 'Nome';
+  static const createCategoryHint = 'Adicione o nome da categoria';
+  static const createCategoryAction = 'Criar categoria';
+  static const createCategoryError = 'O nome não pode estar vazio.';
+
+  // Error
+  static const errorAlertTitle = 'Ocorreu um erro';
+  static const errorCreateCategoryMessage =
+      'Não foi possível criar a categoria, tente novamente.';
+  static const errorActionOK = 'OK';
 }

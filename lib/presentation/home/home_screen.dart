@@ -17,10 +17,7 @@ class HomeScreen extends StatelessWidget {
 
   void _createTask(BuildContext context) {
     Navigator.of(context)
-        .push(CardStackPageRoute(builder: (context) => CategoryPickScreen(
-      onCategorySelected: (_) {
-        Navigator.of(context).pop();
-      },
-    )));
+        .push(CardStackPageRoute(builder: (context) => CategoryPickScreen(),
+    ));
   }
 }

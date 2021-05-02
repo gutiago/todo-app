@@ -7,5 +7,5 @@ abstract class CategoryDao {
   Future<List<Category>> findAllCategories();
 
   @insert
-  Future<void> insertPerson(Category person);
+  Future<void> insertCategory(Category category);
 }

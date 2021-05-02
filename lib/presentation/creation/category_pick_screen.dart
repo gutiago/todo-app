@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:todo_app/components/popover.dart';
 import 'package:todo_app/database/entities/category.dart';
+import 'package:todo_app/presentation/creation/category_create_popover.dart';
 import 'package:todo_app/resources/app_colors.dart';
 import 'package:todo_app/resources/spacings.dart';
 import 'presenter/category_pick_presenter.dart';
@@ -9,11 +11,9 @@ import '../../components/empty_list.dart';
 class CategoryPickScreen extends StatefulWidget {
   const CategoryPickScreen({
     this.presenter = const CategoryPickPresenter(),
-    required this.onCategorySelected,
   });
 
   final CategoryPickPresenter presenter;
-  final Function(Category category) onCategorySelected;
 
   @override
   _CategoryPickScreenState createState() => _CategoryPickScreenState();
@@ -43,17 +43,17 @@ class _CategoryPickScreenState extends State<CategoryPickScreen> {
           opacity: animation,
           child: child,
         ),
-        child: allCategories.isEmpty ? EmptyList() : _categoryList(),
+        child: allCategories.isEmpty ? EmptyList() : _categoryList(context),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: AppColors.darkBlue,
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () => _presentCreateCategory(context),
       ),
     );
   }
 
-  Widget _categoryList() {
+  Widget _categoryList(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
           horizontal: Spacings.x2, vertical: Spacings.x4),
@@ -63,7 +63,7 @@ class _CategoryPickScreenState extends State<CategoryPickScreen> {
             return Card(
               child: ListTile(
                 title: Text(allCategories[index].name),
-                onTap: () => widget.onCategorySelected(allCategories[index]),
+                onTap: () => Navigator.of(context).pop(allCategories[index]),
               ),
             );
           }),
@@ -71,14 +71,24 @@ class _CategoryPickScreenState extends State<CategoryPickScreen> {
   }
 
   void _getCategories() async {
-    Future.delayed(Duration(seconds: 1), () {
-      setState(() {
-        allCategories.add(Category(1, 'Comer feijoada'));
-        allCategories.add(Category(2, 'Tomar agua'));
-      });
-    });
-    // widget.presenter
-    //     .fetchCategories()
-    //     .then((categories) => setState(() => allCategories = categories));
+    widget.presenter
+        .fetchCategories()
+        .then((categories) => setState(() => allCategories = categories));
+  }
+
+  void _presentCreateCategory(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) {
+        return Popover(child: CategoryCreatePopover());
+      },
+    ).then(_checkNewCategory);
+  }
+
+  void _checkNewCategory(dynamic? result) {
+    if (result != null && result is Category) {
+      setState(() => allCategories.add(result));
+    }
   }
 }
