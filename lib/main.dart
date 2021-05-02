@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:todo_app/bloc/home/home_bloc.dart';
 
 import 'auth/firebase_authenticator.dart';
 import 'resources/routes.dart';
 import 'bloc/login/login_bloc.dart';
 import 'presentation/splash_screen.dart';
 import 'presentation/login/login_screen_controller.dart';
-import 'presentation/home/home_screen.dart';
+import 'presentation/home/home_screen_controller.dart';
 import 'navigation/fade_route.dart';
 
 void main() {
@@ -43,7 +44,9 @@ class _CreativeAppState extends State<CreativeApp> {
         return CupertinoPageRoute(
             builder: (context) => _loginScreen(context), settings: settings);
       default:
-        return FadeRoute(HomeScreen());
+        return FadeRoute(
+          builder: (context) => _homeScreen(context),
+        );
     }
   }
 
@@ -54,8 +57,19 @@ class _CreativeAppState extends State<CreativeApp> {
         child: Builder(
           builder: (context) {
             return LoginScreenController(
-              onLoggedIn: () {},
+              onLoggedIn: () => _goTo(context, Routes.home),
             );
+          },
+        ));
+  }
+
+  Widget _homeScreen(BuildContext context) {
+    return BlocProvider<HomeBloc>(
+        create: (context) => HomeBloc(),
+        // ..add(FillScreenContentEvent()),
+        child: Builder(
+          builder: (context) {
+            return HomeScreenController(_firebaseAuthenticator);
           },
         ));
   }

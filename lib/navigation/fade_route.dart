@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class FadeRoute<T> extends PageRoute<T> {
-  FadeRoute(this.child);
+  FadeRoute({required this.builder});
+
+  final WidgetBuilder builder;
 
   @override
   Color get barrierColor => Colors.transparent;
@@ -16,14 +18,14 @@ class FadeRoute<T> extends PageRoute<T> {
   @override
   Duration get transitionDuration => Duration(milliseconds: 500);
 
-  final Widget child;
-
   @override
   Widget buildPage(
     BuildContext context,
     Animation<double> animation,
     Animation<double> secondaryAnimation,
   ) {
+    final child = builder(context);
+
     return FadeTransition(
       opacity: animation,
       child: child,

@@ -9,9 +9,10 @@ import '../../resources/app_colors.dart';
 import '../creation/task_create_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({this.onSignOut});
+  const HomeScreen({required this.onSignOut, required this.onReload});
 
-  final VoidCallback? onSignOut;
+  final VoidCallback onSignOut;
+  final VoidCallback onReload;
 
   @override
   Widget build(BuildContext context) {
@@ -49,8 +50,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   void _createTask(BuildContext context) {
-    Navigator.of(context).push(CardStackPageRoute(
-      builder: (context) => TaskCreateScreen(),
-    ));
+    Navigator.of(context)
+        .push(CardStackPageRoute(builder: (context) => TaskCreateScreen()))
+        .then((_) => onReload());
   }
 }
