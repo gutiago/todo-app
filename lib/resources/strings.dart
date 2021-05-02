@@ -39,7 +39,12 @@ abstract class Strings {
   static const morning = 'Bom dia!';
   static const afternoon = 'Boa tarde!';
   static const night = 'Boa noite!';
+
+  static String todayTasks(int count) =>
+      'Você possui $count tarefas para hoje.';
+
   static String todayDate(String date) => 'HOJE: $date';
+  static String numberOfTasks(int count) => '$count Tarefas';
 
   // Category
   static const categories = 'Categorias';

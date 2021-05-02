@@ -65,8 +65,7 @@ class _CreativeAppState extends State<CreativeApp> {
 
   Widget _homeScreen(BuildContext context) {
     return BlocProvider<HomeBloc>(
-        create: (context) => HomeBloc(),
-        // ..add(FillScreenContentEvent()),
+        create: (context) => HomeBloc()..add(LoadContentEvent()),
         child: Builder(
           builder: (context) {
             return HomeScreenController(_firebaseAuthenticator);

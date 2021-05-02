@@ -19,7 +19,7 @@ class HomeScreenController extends StatelessWidget {
         return oldState != newState;
       },
       builder: (context, state) {
-        if (state is InitialState) {
+        if (state is LoadedState) {
           return HomeScreen(
             onSignOut: () => _trySignOut(context),
             onReload: () => _reloadScreen(context),
