@@ -33,7 +33,7 @@ class _CategoryPickScreenState extends State<CategoryPickScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.darkBlue,
-        leading: CloseButton(),
+        leading: BackButton(),
         title: Text(Strings.categories),
       ),
       backgroundColor: Colors.white,

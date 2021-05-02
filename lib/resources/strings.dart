@@ -43,9 +43,20 @@ abstract class Strings {
   static const createCategoryAction = 'Criar categoria';
   static const createCategoryError = 'O nome não pode estar vazio.';
 
+  // Task
+  static const createTaskTitle = 'Criar tarefa';
+  static const createTaskButtonTitle = 'Criar';
+  static const createTaskFieldTitle = 'Nome';
+  static const createTaskCategoryFieldTitle = 'Categoria';
+  static const createTaskAddCategory = 'Adicionar';
+  static const createTaskFieldHint = 'Adicione o nome da sua tarefa';
+  static const createTaskError = 'O nome não pode estar vazio.';
+
   // Error
   static const errorAlertTitle = 'Ocorreu um erro';
   static const errorCreateCategoryMessage =
       'Não foi possível criar a categoria, tente novamente.';
+  static const errorCreateTaskMessage =
+      'Não foi possível criar a tarefa, tente novamente.';
   static const errorActionOK = 'OK';
 }

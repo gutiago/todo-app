@@ -52,7 +52,7 @@ class _CategoryCreatePopoverState extends State<CategoryCreatePopover> {
               text: Strings.createCategory,
               onPressed: () => _createButtonPressed(context),
               primaryColor: AppColors.darkBlue,
-              isLoading: false,
+              isLoading: _isLoading,
               textStyle: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,

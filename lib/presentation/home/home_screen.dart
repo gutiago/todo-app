@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/components/task_item.dart';
 import 'package:todo_app/components/popover.dart';
-import 'package:todo_app/navigation/card_page_route.dart';
-import '../creation/category_pick_screen.dart';
+import '../../navigation/card_page_route.dart';
+import '../creation/task_create_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -17,7 +17,7 @@ class HomeScreen extends StatelessWidget {
 
   void _createTask(BuildContext context) {
     Navigator.of(context)
-        .push(CardStackPageRoute(builder: (context) => CategoryPickScreen(),
+        .push(CardStackPageRoute(builder: (context) => TaskCreateScreen(),
     ));
   }
 }
