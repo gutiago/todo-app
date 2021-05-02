@@ -8,6 +8,7 @@ class Task {
     this.description,
     this.isComplete,
     this.createdAt,
+    this.deadline,
   );
 
   @PrimaryKey(autoGenerate: true)
@@ -20,4 +21,6 @@ class Task {
   final bool isComplete;
 
   final DateTime createdAt;
+
+  final DateTime deadline;
 }

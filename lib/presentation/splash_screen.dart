@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void _performAsyncChecks() async {
     Future.delayed(const Duration(milliseconds: 1500), () async {
       await Firebase.initializeApp();
-      final database = widget.onLoadFinished(_initialRoute);
+      widget.onLoadFinished(_initialRoute);
     });
   }
 

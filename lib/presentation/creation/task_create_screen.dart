@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_app/navigation/card_page_route.dart';
 import '../../database/entities/category.dart';
 import '../../components/button.dart';
@@ -27,6 +28,7 @@ class _TaskCreateScreenState extends State<TaskCreateScreen> {
   late TextEditingController _controller;
   bool _isLoading = false;
   Category? _category;
+  DateTime? _selectedDateTime;
 
   @override
   void initState() {
@@ -61,6 +63,8 @@ class _TaskCreateScreenState extends State<TaskCreateScreen> {
                   validator: _validator),
               const SizedBox(height: Spacings.x4),
               _categorySection(context),
+              const SizedBox(height: Spacings.x4),
+              _datePickerSection(context),
               const SizedBox(height: Spacings.x10),
               Button(
                 text: Strings.createTaskButtonTitle,
@@ -110,7 +114,7 @@ class _TaskCreateScreenState extends State<TaskCreateScreen> {
                 ),
               ),
             Button(
-              text: Strings.createTaskAddCategory,
+              text: Strings.createTaskAdd,
               expand: false,
               onPressed: () => _pickCategory(context),
             )
@@ -120,13 +124,52 @@ class _TaskCreateScreenState extends State<TaskCreateScreen> {
     );
   }
 
+  Widget _datePickerSection(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          Strings.createTaskDateFildTitle,
+          style: TextStyle(
+            fontSize: 15.0,
+            color: Colors.grey[800],
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: Spacings.x2),
+        Row(
+          children: [
+            if (_selectedDateTime != null)
+              Padding(
+                padding: const EdgeInsets.only(right: Spacings.x3),
+                child: Text(
+                  DateFormat('d/MM/y').format(_selectedDateTime!),
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+            Button(
+              text: Strings.createTaskAdd,
+              expand: false,
+              onPressed: () => _pickDate(context),
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
   void _createButtonPressed(BuildContext context) async {
-    if (_category != null && (_formKey.currentState?.validate() ?? false)) {
+    if (_category != null &&
+        _selectedDateTime != null &&
+        (_formKey.currentState?.validate() ?? false)) {
       try {
         _setLoading(true);
 
-        final task =
-            await widget.presenter.createTask(_controller.text, _category!);
+        final task = await widget.presenter.createTask(
+          _controller.text,
+          _selectedDateTime!,
+          _category!,
+        );
 
         _setLoading(false);
 
@@ -155,6 +198,20 @@ class _TaskCreateScreenState extends State<TaskCreateScreen> {
     Navigator.of(context)
         .push(CardStackPageRoute(builder: (context) => CategoryPickScreen()))
         .then(_checkNewCategory);
+  }
+
+  void _pickDate(BuildContext context) async {
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+    );
+    if (pickedDate != null) {
+      setState(() {
+        _selectedDateTime = pickedDate;
+      });
+    }
   }
 
   void _checkNewCategory(dynamic? result) {

@@ -34,6 +34,10 @@ class FirebaseAuthenticator {
     }
   }
 
+  Future logout() async {
+    return FirebaseAuth.instance.signOut();
+  }
+
   String _parseFirebaseExpection(FirebaseAuthException e) {
     if (e.message == 'weak-password') {
       return Strings.weakPassword;

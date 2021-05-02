@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 
 class ButtonLink extends StatefulWidget {
   const ButtonLink({
-    required this.text,
+    this.text,
     required this.linkText,
     required this.onLinkPressed,
   });
 
-  final String text;
+  final String? text;
   final String linkText;
   final VoidCallback onLinkPressed;
 
@@ -40,7 +40,7 @@ class _ButtonLinkState extends State<ButtonLink> {
           color: Colors.white,
         ),
         children: <TextSpan>[
-          TextSpan(text: widget.text),
+          if (widget.text != null) TextSpan(text: widget.text),
           TextSpan(
               text: widget.linkText,
               style: TextStyle(fontWeight: FontWeight.bold),

@@ -19,6 +19,7 @@ dependencies:
   flutter_bloc: ^7.0.0
   equatable: ^2.0.0
   floor: ^1.1.0
+  intl: ^0.17.0
 
 dev_dependencies:
   floor_generator: ^1.1.0
@@ -39,5 +40,5 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - images/empty.png
+    - images/
   #   - images/a_dot_ham.jpeg

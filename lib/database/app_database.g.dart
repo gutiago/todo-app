@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
         await database.execute(
             'CREATE TABLE IF NOT EXISTS `Category` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL)');
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Task` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `categoryId` INTEGER NOT NULL, `description` TEXT NOT NULL, `isComplete` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `Task` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `categoryId` INTEGER NOT NULL, `description` TEXT NOT NULL, `isComplete` INTEGER NOT NULL, `createdAt` INTEGER NOT NULL, `deadline` INTEGER NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -145,7 +145,8 @@ class _$TaskDao extends TaskDao {
                   'categoryId': item.categoryId,
                   'description': item.description,
                   'isComplete': item.isComplete ? 1 : 0,
-                  'createdAt': _dateTimeConverter.encode(item.createdAt)
+                  'createdAt': _dateTimeConverter.encode(item.createdAt),
+                  'deadline': _dateTimeConverter.encode(item.deadline)
                 }),
         _taskDeletionAdapter = DeletionAdapter(
             database,
@@ -156,7 +157,8 @@ class _$TaskDao extends TaskDao {
                   'categoryId': item.categoryId,
                   'description': item.description,
                   'isComplete': item.isComplete ? 1 : 0,
-                  'createdAt': _dateTimeConverter.encode(item.createdAt)
+                  'createdAt': _dateTimeConverter.encode(item.createdAt),
+                  'deadline': _dateTimeConverter.encode(item.deadline)
                 });
 
   final sqflite.DatabaseExecutor database;
@@ -177,7 +179,8 @@ class _$TaskDao extends TaskDao {
             row['categoryId'] as int,
             row['description'] as String,
             (row['isComplete'] as int) != 0,
-            _dateTimeConverter.decode(row['createdAt'] as int)));
+            _dateTimeConverter.decode(row['createdAt'] as int),
+            _dateTimeConverter.decode(row['deadline'] as int)));
   }
 
   @override
@@ -188,7 +191,8 @@ class _$TaskDao extends TaskDao {
             row['categoryId'] as int,
             row['description'] as String,
             (row['isComplete'] as int) != 0,
-            _dateTimeConverter.decode(row['createdAt'] as int)),
+            _dateTimeConverter.decode(row['createdAt'] as int),
+            _dateTimeConverter.decode(row['deadline'] as int)),
         arguments: [id]);
   }
 

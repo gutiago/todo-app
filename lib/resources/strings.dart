@@ -34,6 +34,13 @@ abstract class Strings {
   static const commonErrorMessage =
       'Ocorreu um erro, por favor tente novamente.';
 
+  // Home
+  static const logout = 'Encerrar sessão';
+  static const morning = 'Bom dia!';
+  static const afternoon = 'Boa tarde!';
+  static const night = 'Boa noite!';
+  static String todayDate(String date) => 'HOJE: $date';
+
   // Category
   static const categories = 'Categorias';
   static const emptyList = 'Oops... \nVocê não criou nada aqui.';
@@ -48,7 +55,8 @@ abstract class Strings {
   static const createTaskButtonTitle = 'Criar';
   static const createTaskFieldTitle = 'Nome';
   static const createTaskCategoryFieldTitle = 'Categoria';
-  static const createTaskAddCategory = 'Adicionar';
+  static const createTaskAdd = 'Adicionar';
+  static const createTaskDateFildTitle = 'Data';
   static const createTaskFieldHint = 'Adicione o nome da sua tarefa';
   static const createTaskError = 'O nome não pode estar vazio.';
 
