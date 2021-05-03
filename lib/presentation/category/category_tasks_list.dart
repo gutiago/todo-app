@@ -21,6 +21,14 @@ class CategoryTasksList extends StatefulWidget {
 }
 
 class _CategoryTasksListState extends State<CategoryTasksList> {
+  late List<Task> tasks;
+
+  @override
+  void initState() {
+    super.initState();
+    tasks = widget.model.tasks;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +43,7 @@ class _CategoryTasksListState extends State<CategoryTasksList> {
           opacity: animation,
           child: child,
         ),
-        child: widget.model.tasks.isEmpty ? EmptyList() : _taskList(context),
+        child: tasks.isEmpty ? EmptyList() : _taskList(context),
       ),
     );
   }
@@ -45,16 +53,16 @@ class _CategoryTasksListState extends State<CategoryTasksList> {
       padding: const EdgeInsets.symmetric(
           horizontal: Spacings.x2, vertical: Spacings.x4),
       child: ListView.builder(
-          itemCount: widget.model.tasks.length,
+          itemCount: tasks.length,
           itemBuilder: (context, index) {
             return Card(
               child: TaskItem(
-                title: widget.model.tasks[index].description,
+                title: tasks[index].description,
                 onChanged: (isComplete) => _updateTask(
                   isComplete,
                   widget.model.tasks[index],
                 ),
-                completed: widget.model.tasks[index].isComplete,
+                completed: tasks[index].isComplete,
               ),
             );
           }),
@@ -62,6 +70,10 @@ class _CategoryTasksListState extends State<CategoryTasksList> {
   }
 
   void _updateTask(bool isComplete, Task task) async {
-    await widget.presenter.updateTask(isComplete, task);
+    final updatedTask = await widget.presenter.updateTask(isComplete, task);
+    final index = tasks.indexOf(task);
+    setState(() {
+      tasks[index] = updatedTask;
+    });
   }
 }
