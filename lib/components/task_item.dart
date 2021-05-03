@@ -4,15 +4,13 @@ import '../resources/app_colors.dart';
 
 class TaskItem extends StatefulWidget {
   TaskItem({
-    required this.id,
     required this.title,
     required this.onChanged,
     this.completed = true,
   });
 
-  final int id;
   final String title;
-  final Function(bool value, int id) onChanged;
+  final Function(bool value) onChanged;
   final bool completed;
 
   @override
@@ -51,7 +49,7 @@ class _TaskItemState extends State<TaskItem> {
   void _didChangeValue() {
     setState(() {
       _value = !_value;
-      widget.onChanged(_value, widget.id);
+      widget.onChanged(_value);
     });
   }
 }

@@ -23,4 +23,22 @@ class Task {
   final DateTime createdAt;
 
   final DateTime deadline;
+
+  Task copyWith({
+    int? id,
+    int? categoryId,
+    String? description,
+    bool? isComplete,
+    DateTime? createdAt,
+    DateTime? deadline,
+  }) {
+    return Task(
+      id ?? this.id,
+      categoryId ?? this.categoryId,
+      description ?? this.description,
+      isComplete ?? this.isComplete,
+      createdAt ?? this.createdAt,
+      deadline ?? this.deadline,
+    );
+  }
 }

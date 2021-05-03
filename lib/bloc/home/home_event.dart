@@ -93,3 +93,19 @@ class LoadContentEvent extends HomeEvent {
     return allCategoriesModel;
   }
 }
+
+@immutable
+class UpdateTaskEvent extends HomeEvent {
+  UpdateTaskEvent(this.isComplete, this.task);
+
+  final bool isComplete;
+  final Task task;
+
+  @override
+  Stream<HomeState> applyAsync(HomeBloc bloc) async* {
+    final newTask = task.copyWith(isComplete: isComplete);
+    final db = await AppDatabase.appDatabase;
+    await db.taskDao.updateTask(newTask);
+    bloc..add(LoadContentEvent());
+  }
+}

@@ -6,6 +6,7 @@ import 'package:todo_app/main.dart';
 import 'package:todo_app/navigation/fade_route.dart';
 import '../../auth/firebase_authenticator.dart';
 import '../../bloc/home/home_bloc.dart';
+import '../../database/entities/task.dart';
 import 'home_screen.dart';
 
 class HomeScreenController extends StatelessWidget {
@@ -25,6 +26,7 @@ class HomeScreenController extends StatelessWidget {
             onSignOut: () => _trySignOut(context),
             onReload: () => _reloadScreen(context),
             state: state,
+            onChanged: (value, task) => _updateTask(context, value, task),
           );
         }
 
@@ -50,5 +52,9 @@ class HomeScreenController extends StatelessWidget {
 
   void _reloadScreen(BuildContext context) {
     BlocProvider.of<HomeBloc>(context).add(LoadContentEvent());
+  }
+
+  void _updateTask(BuildContext context, bool isComplete, Task task) {
+    BlocProvider.of<HomeBloc>(context).add(UpdateTaskEvent(isComplete, task));
   }
 }

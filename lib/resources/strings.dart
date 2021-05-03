@@ -41,7 +41,7 @@ abstract class Strings {
   static const morning = 'Bom dia!';
   static const afternoon = 'Boa tarde!';
   static const night = 'Boa noite!';
-  static const todayTaskSection = 'Tarefas de hoje:';
+  static const todayTaskSection = 'Tarefas de hoje';
 
   static String todayTasks(int count) => 'Parece que está tudo bem.'
       '\nVocê possui $count ${_checkTaskPlural(count)} para hoje.';

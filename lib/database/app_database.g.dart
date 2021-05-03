@@ -153,6 +153,18 @@ class _$TaskDao extends TaskDao {
                   'createdAt': _dateTimeConverter.encode(item.createdAt),
                   'deadline': _dateTimeConverter.encode(item.deadline)
                 }),
+        _taskUpdateAdapter = UpdateAdapter(
+            database,
+            'Task',
+            ['id'],
+            (Task item) => <String, Object?>{
+                  'id': item.id,
+                  'categoryId': item.categoryId,
+                  'description': item.description,
+                  'isComplete': item.isComplete ? 1 : 0,
+                  'createdAt': _dateTimeConverter.encode(item.createdAt),
+                  'deadline': _dateTimeConverter.encode(item.deadline)
+                }),
         _taskDeletionAdapter = DeletionAdapter(
             database,
             'Task',
@@ -173,6 +185,8 @@ class _$TaskDao extends TaskDao {
   final QueryAdapter _queryAdapter;
 
   final InsertionAdapter<Task> _taskInsertionAdapter;
+
+  final UpdateAdapter<Task> _taskUpdateAdapter;
 
   final DeletionAdapter<Task> _taskDeletionAdapter;
 
@@ -209,6 +223,11 @@ class _$TaskDao extends TaskDao {
   @override
   Future<void> insertTask(Task task) async {
     await _taskInsertionAdapter.insert(task, OnConflictStrategy.abort);
+  }
+
+  @override
+  Future<void> updateTask(Task task) async {
+    await _taskUpdateAdapter.update(task, OnConflictStrategy.replace);
   }
 
   @override

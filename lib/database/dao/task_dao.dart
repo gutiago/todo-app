@@ -12,6 +12,9 @@ abstract class TaskDao {
   @insert
   Future<void> insertTask(Task task);
 
+  @Update(onConflict: OnConflictStrategy.replace)
+  Future<void> updateTask(Task task);
+
   @delete
   Future<void> deleteTask(Task task);
 
