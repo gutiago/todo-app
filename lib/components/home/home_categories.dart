@@ -4,9 +4,10 @@ import '../../resources/spacings.dart';
 import '../../resources/strings.dart';
 
 class HomeCategories extends StatelessWidget {
-  const HomeCategories(this.categories);
+  const HomeCategories(this.categories, this.onSelectedCategory);
 
   final List<HomeCategoryModel> categories;
+  final Function onSelectedCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -29,55 +30,58 @@ class HomeCategories extends StatelessWidget {
               itemCount: categories.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return Card(
-                  child: Container(
-                    width: 250.0,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.all(Spacings.x2),
-                          child:
-                              Icon(Icons.category_outlined, color: Colors.grey),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(Spacings.x1),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: Spacings.x2,
-                                    vertical: Spacings.x1),
-                                child: Text(
-                                  categories[index].numberOfTasks,
-                                  style: TextStyle(color: Colors.grey),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: Spacings.x2,
-                                    vertical: Spacings.x1),
-                                child: Text(
-                                  categories[index].categoryName,
-                                  style: TextStyle(fontSize: 28.0),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(Spacings.x2),
-                                child: LinearProgressIndicator(
-                                  value: categories[index].percentageCompleted,
-                                ),
-                              ),
-                            ],
+                return InkWell(
+                  onTap: () => onSelectedCategory(categories[index]),
+                  child: Card(
+                    child: Container(
+                      width: 250.0,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(Spacings.x2),
+                            child:
+                                Icon(Icons.category_outlined, color: Colors.grey),
                           ),
-                        ),
-                      ],
+                          Padding(
+                            padding: const EdgeInsets.all(Spacings.x1),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: Spacings.x2,
+                                      vertical: Spacings.x1),
+                                  child: Text(
+                                    categories[index].numberOfTasks,
+                                    style: TextStyle(color: Colors.grey),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: Spacings.x2,
+                                      vertical: Spacings.x1),
+                                  child: Text(
+                                    categories[index].categoryName,
+                                    style: TextStyle(fontSize: 28.0),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(Spacings.x2),
+                                  child: LinearProgressIndicator(
+                                    value: categories[index].percentageCompleted,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(Spacings.x2)),
                   ),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(Spacings.x2)),
                 );
               },
             ),

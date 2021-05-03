@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/components/button_link.dart';
+import 'package:todo_app/model/home/home_category_model.dart';
 import 'package:todo_app/resources/spacings.dart';
 import 'package:todo_app/resources/strings.dart';
 import '../../bloc/home/home_bloc.dart';
@@ -9,7 +10,9 @@ import '../../components/home/home_tasks.dart';
 import '../../database/entities/task.dart';
 import '../../navigation/card_page_route.dart';
 import '../../resources/app_colors.dart';
+import '../category/category_tasks_list.dart';
 import '../creation/task_create_screen.dart';
+import '../../navigation/scale_route.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -58,7 +61,11 @@ class HomeScreen extends StatelessWidget {
                 state.todayDate,
               ),
               const SizedBox(height: Spacings.x7),
-              if (state.categories.isNotEmpty) HomeCategories(state.categories),
+              if (state.categories.isNotEmpty)
+                HomeCategories(
+                  state.categories,
+                  (model) => _presentCategory(context, model),
+                ),
               if (state.todayTasks.isNotEmpty)
                 HomeTasks(state.todayTasks, onChanged),
             ],
@@ -76,6 +83,12 @@ class HomeScreen extends StatelessWidget {
   void _createTask(BuildContext context) {
     Navigator.of(context)
         .push(CardStackPageRoute(builder: (context) => TaskCreateScreen()))
+        .then((_) => onReload());
+  }
+
+  void _presentCategory(BuildContext context, HomeCategoryModel model) {
+    Navigator.of(context)
+        .push(ScaleRoute(builder: (context) => CategoryTasksList(model)))
         .then((_) => onReload());
   }
 }

@@ -86,6 +86,7 @@ class LoadContentEvent extends HomeEvent {
         Strings.numberOfTasks(categoryTasks.length),
         currentCategory.name,
         percentageCompleted,
+        categoryTasks.toList(),
       );
 
       allCategoriesModel.add(model);
