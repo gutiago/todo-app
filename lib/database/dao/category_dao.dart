@@ -8,4 +8,7 @@ abstract class CategoryDao {
 
   @insert
   Future<void> insertCategory(Category category);
+
+  @Query('DELETE FROM Category')
+  Future<void> deleteAll();
 }

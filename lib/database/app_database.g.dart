@@ -129,6 +129,11 @@ class _$CategoryDao extends CategoryDao {
   }
 
   @override
+  Future<void> deleteAll() async {
+    await _queryAdapter.queryNoReturn('DELETE FROM Category');
+  }
+
+  @override
   Future<void> insertCategory(Category category) async {
     await _categoryInsertionAdapter.insert(category, OnConflictStrategy.abort);
   }
@@ -194,6 +199,11 @@ class _$TaskDao extends TaskDao {
             _dateTimeConverter.decode(row['createdAt'] as int),
             _dateTimeConverter.decode(row['deadline'] as int)),
         arguments: [id]);
+  }
+
+  @override
+  Future<void> deleteAll() async {
+    await _queryAdapter.queryNoReturn('DELETE FROM Task');
   }
 
   @override

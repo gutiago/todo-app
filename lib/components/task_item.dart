@@ -10,9 +10,9 @@ class TaskItem extends StatefulWidget {
     this.completed = true,
   });
 
-  final String id;
+  final int id;
   final String title;
-  final Function(bool value, String id) onChanged;
+  final Function(bool value, int id) onChanged;
   final bool completed;
 
   @override

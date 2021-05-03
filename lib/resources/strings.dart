@@ -1,3 +1,5 @@
+import 'package:intl/intl.dart';
+
 abstract class Strings {
   Strings._() : super();
 
@@ -39,12 +41,19 @@ abstract class Strings {
   static const morning = 'Bom dia!';
   static const afternoon = 'Boa tarde!';
   static const night = 'Boa noite!';
+  static const todayTaskSection = 'Tarefas de hoje:';
 
-  static String todayTasks(int count) =>
-      'Você possui $count tarefas para hoje.';
+  static String todayTasks(int count) => 'Parece que está tudo bem.'
+      '\nVocê possui $count ${_checkTaskPlural(count)} para hoje.';
 
   static String todayDate(String date) => 'HOJE: $date';
-  static String numberOfTasks(int count) => '$count Tarefas';
+
+  static String numberOfTasks(int count) =>
+      '$count ${toBeginningOfSentenceCase(_checkTaskPlural(count))}';
+
+  static String _checkTaskPlural(int count) {
+    return (count == 1) ? 'tarefa' : 'tarefas';
+  }
 
   // Category
   static const categories = 'Categorias';

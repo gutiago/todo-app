@@ -14,4 +14,7 @@ abstract class TaskDao {
 
   @delete
   Future<void> deleteTask(Task task);
+
+  @Query('DELETE FROM Task')
+  Future<void> deleteAll();
 }
