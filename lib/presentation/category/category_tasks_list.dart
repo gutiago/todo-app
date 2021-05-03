@@ -32,6 +32,7 @@ class _CategoryTasksListState extends State<CategoryTasksList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: AppColors.darkBlue,
         leading: CloseButton(),

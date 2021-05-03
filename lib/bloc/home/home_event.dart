@@ -79,7 +79,9 @@ class LoadContentEvent extends HomeEvent {
           tasks.where((e) => e.categoryId == currentCategory.id);
       final allCompleted = tasks.where((e) => e.isComplete);
 
-      final percentageCompleted = allCompleted.length / categoryTasks.length;
+      final percentageCompleted = categoryTasks.length > 0
+          ? allCompleted.length / categoryTasks.length
+          : 0.0;
 
       final model = HomeCategoryModel(
         currentCategory,

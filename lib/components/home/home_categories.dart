@@ -41,8 +41,8 @@ class HomeCategories extends StatelessWidget {
                         children: <Widget>[
                           Padding(
                             padding: const EdgeInsets.all(Spacings.x2),
-                            child:
-                                Icon(Icons.category_outlined, color: Colors.grey),
+                            child: Icon(Icons.category_outlined,
+                                color: Colors.grey),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(Spacings.x1),
@@ -70,7 +70,8 @@ class HomeCategories extends StatelessWidget {
                                 Padding(
                                   padding: const EdgeInsets.all(Spacings.x2),
                                   child: LinearProgressIndicator(
-                                    value: categories[index].percentageCompleted,
+                                    value:
+                                        categories[index].percentageCompleted,
                                   ),
                                 ),
                               ],
