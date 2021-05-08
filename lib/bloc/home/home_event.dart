@@ -14,8 +14,6 @@ class LoadContentEvent extends HomeEvent {
 
   @override
   Stream<HomeState> applyAsync(HomeBloc bloc) async* {
-    yield InitialState();
-
     final db = await AppDatabase.appDatabase;
     final categories = await db.categoryDao.findAllCategories();
     final tasks = await db.taskDao.findAllTasks();
@@ -77,7 +75,7 @@ class LoadContentEvent extends HomeEvent {
     for (Category currentCategory in categories) {
       final categoryTasks =
           tasks.where((e) => e.categoryId == currentCategory.id);
-      final allCompleted = tasks.where((e) => e.isComplete);
+      final allCompleted = categoryTasks.where((e) => e.isComplete);
 
       final percentageCompleted = categoryTasks.length > 0
           ? allCompleted.length / categoryTasks.length
